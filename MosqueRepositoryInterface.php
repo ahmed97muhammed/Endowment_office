@@ -50,13 +50,4 @@ interface MosqueRepositoryInterface
 
  public function MosquesHasWaqfesByName($mosque_type,$mosque_name);
  
-
-//  public function getGamaes();
-
-//  public function filterGamaes($criteria,$inputval);
- 
-//  public function GamaesWithiMaamMoazenSkn();
-
-//  public function GamaesHasWaqfes();
-
 }
