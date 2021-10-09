@@ -9,14 +9,13 @@ use Alkoumi\LaravelHijriDate\Hijri;
 use GeniusTS\HijriDate\Date;
 class MosqueRepository implements MosqueRepositoryInterface
 {
-    public function getMosques(){
+    public function getMosques()
+    {
         return Mosque::with('getwaqfes')->get();
     }
-    // public function getGamaes(){
-    // return Mosque::with('getwaqfes')->where("mosque_type","جامع")->get();
-    // }
-
-    public function getMosque($id){
+  
+    public function getMosque($id)
+    {
         return Mosque::findOrFail($id);
     }
 
@@ -62,16 +61,6 @@ class MosqueRepository implements MosqueRepositoryInterface
     public function deleteMosqueWaqf($waqf_id)
     {
         return MosqueWaqf::findOrFail($waqf_id)->delete();
-    }
-
-    public function createMosqueWaqf($waqf)
-    {
-        $validation = Validator::make($waqf, [
-        'waqf_number' => ['nullable','numeric'],
-        'waqf_rent_value'=>['nullable','numeric'],
-        'waqf_rent_total'=>['nullable','numeric'],
-        ]);
-        return $validation->passes()?MosqueWaqf::create($waqf):response()->json('error',500);
     }
 
     public function updateMosqueWaqf($waqf,$waqf_id)
@@ -153,22 +142,9 @@ class MosqueRepository implements MosqueRepositoryInterface
 
     public function MosquesHasWaqfesByName($mosque_type,$mosque_name)
     {
-        return DB::table('mosques')->join("mosque_waqfs","mosques.id","related_mosque_id")->where("mosque_type",$mosque_type)->where("mosque_name",$mosque_name)->get();
+        return DB::table('mosques')
+            ->join("mosque_waqfs","mosques.id","related_mosque_id")
+            ->where("mosque_type",$mosque_type)->where("mosque_name",$mosque_name)->get();
     }
-
-    // public function filterGamaes($criteria,$inputval)
-    // {
-    //     return Mosque::where($criteria,'like','%'.$inputval.'%')->where("mosque_type","جامع")->get();
-    // }
-
-    // public function GamaesWithiMaamMoazenSkn()
-    // {
-    // return Mosque::Where("exist_residence_to_emam","نعم")->where("mosque_type","جامع")->Where("exist_residence_to_moazen","نعم")->get();
-    // }
-
-    // public function GamaesHasWaqfes()
-    // {
-    // return Mosque::whereHas("getwaqfes")->where("mosque_type","جامع")->get();
-    // }
 
 }
