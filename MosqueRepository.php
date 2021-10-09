@@ -144,7 +144,8 @@ class MosqueRepository implements MosqueRepositoryInterface
     {
         return DB::table('mosques')
             ->join("mosque_waqfs","mosques.id","related_mosque_id")
-            ->where("mosque_type",$mosque_type)->where("mosque_name",$mosque_name)->get();
+            ->where("mosque_type",$mosque_type)
+            ->where("mosque_name",$mosque_name)->get();
     }
 
 }
